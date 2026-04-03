@@ -10,5 +10,6 @@ class Categorie extends Model
         'name',
         'title',
         'content',
+        'accueil'
     ];
 }

@@ -30,9 +30,12 @@ avec une programmation d'animations diverses et d'événements rythmée par les 
         </p>
     </section>
 
-    <livewire:show-cards cat="ecolieu" :withimg="true"/>
+    @foreach ($items as $item) 
+        <livewire:show-cards cat="{{$item->name}}" withimg="{{$item->withimg}}" />
+    @endforeach
+             
+             
 
-    <livewire:show-cards cat="activites" :withimg="false"/>
 
 
 </div>

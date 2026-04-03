@@ -13,10 +13,15 @@ class CategorieForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->label("Nom"),
                 TextInput::make('title')
-                    ->required(),
+                    ->required()
+                    ->label('Titre'),
+                TextInput::make('accueil')
+                    ->label('Affichage page accueil (image/texte)'),
                 Textarea::make('content')
+                    ->label("Texte")
                     ->columnSpanFull(),
             ]);
     }

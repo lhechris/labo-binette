@@ -20,8 +20,14 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
+use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Filament\Support\Colors;
 
+use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
+use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Log;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -67,12 +73,26 @@ class AdminPanelProvider extends PanelProvider
                         ->label('Google')
                         ->icon('heroicon-o-globe-alt')
                         ->color(Color::hex('#4285F4'))                        
+
                 ])
-                ->registration(true))
+                ->registration(true) 
+                ->registration(function (string $provider, SocialiteUserContract $oauthUser, ?Authenticatable $user) {
+                    //pour refuser les utilisateurs qui ne sont pas dans la table users
+                    return ($user!==null); 
+                })
+                /*->createUserUsing(function (string $provider, SocialiteUserContract $oauthUser, FilamentSocialitePlugin $plugin) {
+                    Log::info("J'ai la methode createUserUsing");
+                })
+                ->resolveUserUsing(function (string $provider, SocialiteUserContract $oauthUser, FilamentSocialitePlugin $plugin) {
+                    Log::info("J'ai la methode resolveUserUsing");
+                })*/
                 
-             ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make())
+                )               
+                
+             ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make() )
              ->plugin(\BezhanSalleh\FilamentShield\FilamentShieldPlugin::make())
             ;
 
     }
 }
+

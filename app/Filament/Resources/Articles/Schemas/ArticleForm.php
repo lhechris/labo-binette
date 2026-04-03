@@ -39,10 +39,12 @@ class ArticleForm
                     ['grid', 'gridDelete'],
                     ['table', 'attachFiles'], 
                     ['undo', 'redo'],
-                ])                
-                ->fileAttachmentsDisk('public') 
+                ])
+                ->fileAttachmentsDisk('public')
                 ->fileAttachmentsDirectory('editor')
-                ->fileAttachmentsVisibility('public'),
+                ->fileAttachmentsVisibility('public')
+                ->formatStateUsing(fn($state) => is_array($state) ? json_encode($state) : $state)
+                ->dehydrateStateUsing(fn($state) => $state)
 
             ]);
     }
