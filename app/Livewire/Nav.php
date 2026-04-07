@@ -12,7 +12,9 @@ class Nav extends Component
 
     public function mount()
     {
-        $this->categories = Categorie::get();
+        $this->categories = Categorie::whereNull('parent')
+                                     ->orWhere('parent','')
+                                     ->get();
     }
 
     public function render()

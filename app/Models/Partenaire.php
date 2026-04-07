@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categorie extends Model
+class Partenaire extends Model
 {
         protected $fillable = [
+        'order',
         'name',
-        'title',
         'content',
-        'parent'
+        'type',
+        'image'
     ];
 }

@@ -15,9 +15,22 @@ class ShowCards extends Component
 
     public function mount($cat,$withimg)
     {
-        $this->articles = Article::where('categorie', $cat)->get();
         $this->categorie = Categorie::where('name', $cat)->firstOrFail();
+
+        $this->articles = Article::where('categorie', $cat)->get();
+        if (count($this->articles) == 0) {
+            $this->articles = Categorie::where('parent', $cat)->get();
+        }
+
         $this->withimg = $withimg;
+        if ($this->withimg === null) {
+            $this->withimg = false;
+            foreach($this->articles as $article) {
+                if (($article->image === null) || ($article->image == '')) {
+                    $this->withimg = true;
+                }
+            }            
+        }
 
     }
 

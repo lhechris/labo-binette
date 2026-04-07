@@ -7,6 +7,7 @@
                 @foreach ($categories as $categorie)
                     <a class="hover:text-green-800 transition" href="{{ route('categorie',[$categorie->name,"root"]) }}">{{ $categorie->title}}</a>
                 @endforeach
+                <a class="hover:text-green-800 transition" href="{{ route('partenaires') }}">Partenaires</a>
             </div>
 
 

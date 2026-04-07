@@ -14,7 +14,7 @@ new class extends Component
         subtitle="Découvrez notre association et notre éco‑lieu."
         background="{{ asset('images/jardin_lb_2048.jpg') }}"
         buttontitle="nous découvrir"
-        buttonlink="/article/asso/pres"
+        buttonlink="/categorie/asso/pres"
     />
 
 
@@ -33,9 +33,7 @@ avec une programmation d'animations diverses et d'événements rythmée par les 
     @foreach ($items as $item) 
         <livewire:show-cards cat="{{$item->name}}" withimg="{{$item->withimg}}" />
     @endforeach
-             
-             
 
-
+    <livewire:show-contact />
 
 </div>

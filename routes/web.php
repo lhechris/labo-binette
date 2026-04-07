@@ -15,6 +15,6 @@ Route::get('/', \App\Livewire\ShowAccueil::class)->name('accueil');
 
 Route::get('/categorie/{nom}/{article}', \App\Livewire\ShowCategorie::class)->name("categorie");
 
-
+Route::get('/partenaires', \App\Livewire\ShowPartenaires::class)->name('partenaires');
 
 require __DIR__.'/settings.php';

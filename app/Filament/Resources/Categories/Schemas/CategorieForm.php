@@ -18,8 +18,8 @@ class CategorieForm
                 TextInput::make('title')
                     ->required()
                     ->label('Titre'),
-                TextInput::make('accueil')
-                    ->label('Affichage page accueil (image/texte)'),
+                TextInput::make('parent')
+                    ->label('Categorie parente'),
                 Textarea::make('content')
                     ->label("Texte")
                     ->columnSpanFull(),
