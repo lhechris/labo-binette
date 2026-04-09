@@ -13,25 +13,26 @@ class ShowCards extends Component
     public $categorie;
     private $withimg;
 
-    public function mount($cat,$withimg)
+    public function mount($cat,$option)
     {
-        $this->categorie = Categorie::where('name', $cat)->firstOrFail();
+        $cat = intval($cat);
+        $this->categorie = Categorie::where('id', $cat)->firstOrFail();
 
-        $this->articles = Article::where('categorie', $cat)->get();
+        $this->articles = Article::where('categorie_id', $cat)->get();
         if (count($this->articles) == 0) {
-            $this->articles = Categorie::where('parent', $cat)->get();
+            $this->articles = Categorie::where('parent_id', $cat)->get();
         }
 
-        $this->withimg = $withimg;
-        if ($this->withimg === null) {
+        if (($option === null) || (trim($option) === '')){
             $this->withimg = false;
             foreach($this->articles as $article) {
-                if (($article->image === null) || ($article->image == '')) {
+                if (($article->image !== null) && (trim($article->image) != '')) {
                     $this->withimg = true;
                 }
             }            
+        } else {
+            $this->withimg = ($option === 'image');            
         }
-
     }
 
     public function render()

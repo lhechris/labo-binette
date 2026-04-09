@@ -3,14 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 #[Table('accueil')]
 class Accueil extends Model
 {
         protected $fillable = [
-        'type',
+        'accueilable_type',
         'order',
-        'ident',
+        'accueilable_id',
         'option'    
     ];
+
+    public function accueilable() : MorphTo
+    {
+        return $this->morphTo();
+    }
+
+
 }

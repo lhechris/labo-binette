@@ -5,7 +5,7 @@
             <div class="hidden md:flex space-x-8 text-lg">
                 <a class="hover:text-green-800 transition" href="{{ route('accueil') }}">Accueil</a>
                 @foreach ($categories as $categorie)
-                    <a class="hover:text-green-800 transition" href="{{ route('categorie',[$categorie->name,"root"]) }}">{{ $categorie->title}}</a>
+                    <a class="hover:text-green-800 transition" href="{{ route('categorie',[$categorie->id,0]) }}">{{ $categorie->title}}</a>
                 @endforeach
                 <a class="hover:text-green-800 transition" href="{{ route('partenaires') }}">Partenaires</a>
             </div>
@@ -25,7 +25,7 @@
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
             <a class="hover:text-green-800 transition" href="{{ route('accueil') }}">Accueil</a>
                 @foreach ($categories as $categorie)
-                    <a class="hover:text-green-800 transition" href="{{ route('categorie',[$categorie->name,"root"]) }}">{{ $categorie->title }}</a>
+                    <a class="hover:text-green-800 transition" href="{{ route('categorie',[$categorie->id,0]) }}">{{ $categorie->title }}</a>
                 @endforeach
         </div>
 </nav>

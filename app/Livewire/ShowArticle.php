@@ -14,8 +14,11 @@ class ShowArticle extends Component
 
     public function mount($cat,$nom)
     {
-        $this->article = Article::where('name', $nom)->firstOrFail();
-        //$this->categorie = Categorie::where('name',$cat)->firstOrFail();
+        $nom = intval($nom);
+        $cat = intval($cat);
+
+        $this->article = Article::where('id', $nom)->firstOrFail();
+        //$this->categorie = Categorie::where('id',$cat)->firstOrFail();
     }
 
     public function render()

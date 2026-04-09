@@ -3,19 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
     
     protected $fillable = [
         'title',
-        'categorie',
-        'name',
+        'categorie_id',
         'summary',
         'image',
         'content',
     ];
 
+
+    public function categorie() : BelongsTo
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 
     protected static function booted(): void {
         static::retrieved(function (Article $article) {

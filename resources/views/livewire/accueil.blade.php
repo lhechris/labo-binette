@@ -30,8 +30,8 @@ avec une programmation d'animations diverses et d'événements rythmée par les 
         </p>
     </section>
 
-    @foreach ($items as $item) 
-        <livewire:show-cards cat="{{$item->name}}" withimg="{{$item->withimg}}" />
+    @foreach ($accueils as $acc) 
+        <livewire:show-cards cat="{{$acc->accueilable->id}}" option="{{$acc->option}}" />
     @endforeach
 
     <livewire:show-contact />

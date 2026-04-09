@@ -15,14 +15,23 @@ class ShowPartenaires extends Component
 
     public function mount()
     {
-        $this->avectexte = Partenaire::orderBy('order')
-                                       ->get();
-        $this->sanstexte = Partenaire::where('content is null')
-                                       ->orderBy('order')
-                                       ->get();
-        $this->asso = Partenaire::where("type='asso'")
-                                       ->orderBy('order')
-                                       ->get();
+        $partenaires = Partenaire::orderBy("order")->get();
+
+        $this->avectexte = array();
+        $this->sanstexte = array();
+        $this->asso = array();
+
+        foreach($partenaires as $partenaire) {
+            if ($partenaire->type == 'asso') {
+                array_push($this->asso,$partenaire);
+            
+            } else if (($partenaire->content === null) || (trim($partenaire->content)) === '' ) {
+                array_push($this->sanstexte,$partenaire);
+
+            } else {
+                array_push($this->avectexte,$partenaire);
+            }
+        }
     }
 
     public function render()

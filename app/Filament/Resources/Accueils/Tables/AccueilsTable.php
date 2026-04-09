@@ -15,9 +15,16 @@ class AccueilsTable
         return $table
             ->columns([
                 TextColumn::make('order')
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Ordre'),
                 TextColumn::make('ident')
+                    ->searchable()
+                    ->label('Identifiant'),
+                TextColumn::make('type')
                     ->searchable(),
+                TextColumn::make('option')
+                    ->searchable(),
+
             ])
             ->filters([
                 //

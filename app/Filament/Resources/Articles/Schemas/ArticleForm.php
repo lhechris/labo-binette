@@ -16,18 +16,17 @@ class ArticleForm
     {
         return $schema
             ->components([ 
-                Select::make('categorie')
+                Select::make('categorie_id')
                         ->label('Categorie')
-                        ->options(Categorie::all()->pluck('title', 'name'))
+                        ->options(Categorie::all()->pluck('title', 'id'))
                         ->searchable(),
                 TextInput::make('title')->required(),
-                TextInput::make('name')->required(),
                 TextInput::make('summary'),
                 FileUpload::make('image')
                         ->image()
                         ->imageEditor()
                         ->disk('public') 
-                        ->directory('editor')
+                        ->directory('articles')
                         ->visibility('public'),
                 RichEditor::make('content')
                 ->columnSpanFull()

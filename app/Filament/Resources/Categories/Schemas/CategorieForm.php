@@ -4,7 +4,9 @@ namespace App\Filament\Resources\Categories\Schemas;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
+use App\Models\Categorie;
 
 class CategorieForm
 {
@@ -12,14 +14,13 @@ class CategorieForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required()
-                    ->label("Nom"),
                 TextInput::make('title')
                     ->required()
                     ->label('Titre'),
-                TextInput::make('parent')
-                    ->label('Categorie parente'),
+                Select::make('parent_id')
+                        ->label('Categorie parente')
+                        ->options(Categorie::all()->pluck('title', 'id'))
+                        ->searchable(),                    
                 Textarea::make('content')
                     ->label("Texte")
                     ->columnSpanFull(),

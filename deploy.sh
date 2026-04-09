@@ -70,6 +70,10 @@ sudo ln -s "${SHARED}/app" "${NEW_WEB_RELEASE}/storage/app/public"
 sudo rm -f "${NEW_WEB_RELEASE}/.env"
 sudo ln -s "${SHARED}/.env" "${NEW_WEB_RELEASE}/.env"
 
+sudo rm -rf "${NEW_WEB_RELEASE}/database/seeders"
+sudo ln -s "${SHARED}/seeders" "${NEW_WEB_RELEASE}/database/seeders"
+
+
 # === PERMISSIONS ===
 echo "=== Permissions ==="
 sudo chown -R www-data:www-data "${NEW_WEB_RELEASE}"

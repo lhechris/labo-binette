@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('accueils', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('accueilable_type');
             $table->integer('order');
-            $table->string('ident');
+            $table->integer('accueilable_id');
             $table->string('option')->nullable();
             $table->timestamps();
         });

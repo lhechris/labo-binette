@@ -14,7 +14,7 @@ class ArticlesTable
     {
         return $table
             ->columns([
-                TextColumn::make('categorie')->sortable()->searchable()->label(__('Categorie')),
+                TextColumn::make('categorie.title')->label(__('Categorie')),
                 TextColumn::make('title')->sortable()->searchable()->label(__('Titre')),
             ])
             ->filters([

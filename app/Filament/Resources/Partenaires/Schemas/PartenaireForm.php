@@ -20,7 +20,7 @@ class PartenaireForm
                         ->image()
                         ->imageEditor()
                         ->disk('public') 
-                        ->directory('editor')
+                        ->directory('partenaires')
                         ->visibility('public'),
                 Textarea::make('content')
                     ->label('Texte'),

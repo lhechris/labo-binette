@@ -27,8 +27,6 @@ use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Illuminate\Support\Str;
 
-use Illuminate\Support\Facades\Log;
-
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -61,7 +59,6 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                \App\Http\Middleware\LogSocialite::class,
             ])
             ->authMiddleware([
                 Authenticate::class,

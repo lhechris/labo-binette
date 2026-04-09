@@ -3,7 +3,7 @@
 
         <div class="grid md:grid-cols-3 gap-10" >
              @foreach ($articles as $article)
-            <a href="{{ route('categorie',[$categorie->name,$article->name]) }}">
+            <a href="{{ route('categorie',[$categorie->id,$article->id]) }}">
               <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <h3 class="text-2xl font-semibold mb-3 text-green-200">{{ $article->title }}</h3>
                 <div class="text-gray-100 leading-relaxed">

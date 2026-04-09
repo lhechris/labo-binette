@@ -16,12 +16,16 @@ class ShowCategorie extends Component
 
     public function mount($nom,$article)
     {
-        $this->categorie = Categorie::where('name', $nom)->firstOrFail();
+        $nom = intval($nom);
+        $article = intval($article);
+    
+        $this->categorie = Categorie::where('id', $nom)->firstOrFail();
 
-        $this->subcategories = Categorie::where('parent',$nom)->get();
-        $this->articles = Article::where('categorie',$nom)->get();
+
+        $this->subcategories = Categorie::where('parent_id',$nom)->get();
+        $this->articles = Article::where('categorie_id',$nom)->get();
         
-        if ($article === "root") {
+        if ($article === 0) {
             //On veut le premier élément de la liste
             if (count($this->articles)>0) {
                 // c'est une categorie d'article
@@ -29,7 +33,7 @@ class ShowCategorie extends Component
             } 
         } else {
             foreach($this->articles as $item) {
-                if ($item->name == $article) {
+                if ($item->id == $article) {
                     $this->article = $item;
                     break;
                 }
