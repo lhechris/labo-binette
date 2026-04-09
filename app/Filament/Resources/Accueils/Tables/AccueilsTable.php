@@ -17,11 +17,12 @@ class AccueilsTable
                 TextColumn::make('order')
                     ->searchable()
                     ->label('Ordre'),
-                TextColumn::make('ident')
+                TextColumn::make('accueilable.title')
                     ->searchable()
                     ->label('Identifiant'),
-                TextColumn::make('type')
-                    ->searchable(),
+                TextColumn::make('accueilable_type')
+                    ->searchable()
+                    ->label('Type'),
                 TextColumn::make('option')
                     ->searchable(),
 

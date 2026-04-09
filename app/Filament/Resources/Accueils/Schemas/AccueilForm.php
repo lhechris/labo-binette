@@ -11,10 +11,10 @@ class AccueilForm
     {
         return $schema
             ->components([
-                TextInput::make('ident')
+                TextInput::make('accueilable_id')
                     ->required()
                     ->label("identifiant"),
-                TextInput::make('type')
+                TextInput::make('accueilable_type')
                     ->required()
                     ->label('Type'),
                 TextInput::make('order')
