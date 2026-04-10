@@ -6,17 +6,17 @@
             <div class="flex space-x-8 text-lg">
                 @foreach ($articles as $item)
                     <a  href="{{ route('categorie',[$categorie->id,$item->id]) }}"
-                        @class([
-                            'hover:text-green-800 transition',
-                            'bg-blue-100' => $item->id === $article->id,
-                        ])
-                        >{{ $item->title}}</a>
+                        class="hover:text-green-800 transition" >{{ $item->title}}</a>
                 @endforeach
             </div>
         </div>
     </nav>
 
-    <div class="py-15">{!! $article->content !!}</div>
+
+    <div class="py-15">
+        <div>{!! $categorie->content !!}</div>
+        <livewire:show-cards cat="{{$categorie->id}}" option="" />
+    </div>
 
 
 </div>

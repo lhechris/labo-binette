@@ -11,8 +11,10 @@ class ShowCategorie extends Component
     
     public $categorie;
     public $subcategories;
+    public $subcategorie;
     public $articles;
     public $article;
+    private $rootelement;
 
     public function mount($nom,$article)
     {
@@ -26,15 +28,31 @@ class ShowCategorie extends Component
         $this->articles = Article::where('categorie_id',$nom)->get();
         
         if ($article === 0) {
-            //On veut le premier élément de la liste
-            if (count($this->articles)>0) {
-                // c'est une categorie d'article
+            $this->rootelement = true;
+
+            //s'il n'y a qu'un seul article ou une seule categorie 
+            //on l'affiche
+            if (count($this->articles) == 1) {
+                $this->rootelement = false;
                 $this->article = $this->articles[0];
-            } 
+            }
+            if (count($this->subcategories) == 1) {
+                $this->rootelement = false;
+                $this->subcategories = $this->articles[0];
+            }
+
         } else {
+            $this->rootelement = false;
+
             foreach($this->articles as $item) {
                 if ($item->id == $article) {
                     $this->article = $item;
+                    break;
+                }
+            }
+            foreach($this->subcategories as $item) {
+                if ($item->id == $article) {
+                    $this->subcategorie = $item;
                     break;
                 }
             }
@@ -43,8 +61,12 @@ class ShowCategorie extends Component
 
     public function render()
     {
-        if (count($this->articles)>0) {
+        if ($this->rootelement) {
             return view('livewire.show-categorie');
+
+        } else if (count($this->articles)>0) {
+            return view('livewire.show-article');
+
         } else {
             return view('livewire.show-subcategorie');
         }

@@ -4,11 +4,11 @@
             <div class="hidden md:flex text-2xl font-bold text-green-600">{{ $categorie->title }}</div>
 
             <div class="flex space-x-8 text-lg">
-                @foreach ($articles as $item)
-                    <a  href="{{ route('categorie',[$categorie->id,$item->id]) }}"
+                @foreach ($subcategories as $item)
+                    <a  href="{{ route('categorie',[$subcategorie->id,0]) }}"
                         @class([
                             'hover:text-green-800 transition',
-                            'bg-blue-100' => $item->id === $article->id,
+                            'bg-blue-100' => $item->id === $subcategorie->id,
                         ])
                         >{{ $item->title}}</a>
                 @endforeach
@@ -17,9 +17,10 @@
     </nav>
 
     <div class="py-15">
-        @foreach ($subcategories as $item) 
-            <livewire:show-cards cat="{{$item->id}}" option="" />
-        @endforeach
+        @if ($subcategorie)
+        <div>{!! $subcategorie->content !!}</div>
+        <livewire:show-cards cat="{{$subcategorie->id}}" option="" />
+        @endif
     </div>
 
 

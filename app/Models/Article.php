@@ -16,7 +16,6 @@ class Article extends Model
         'content',
     ];
 
-
     public function categorie() : BelongsTo
     {
         return $this->belongsTo(Categorie::class);

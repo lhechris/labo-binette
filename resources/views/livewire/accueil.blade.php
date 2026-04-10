@@ -36,4 +36,16 @@ avec une programmation d'animations diverses et d'événements rythmée par les 
 
     <livewire:show-contact />
 
+
+    <section class="max-w-6xl mx-auto px-6 py-20" >        
+        <h2 class="text-4xl font-bold text-gray-900 mb-10 text-center">Nos partenaires</h2>
+        <p class="text-gray-800 text-lg leading-relaxed text-center max-w-3xl mx-auto">
+            <button class="mt-10 px-6 py-3 bg-green-500 hover:bg-green-400 text-gray-900 font-semibold rounded-md shadow-xl transition"
+                    onclick="location.href='/partenaires'"
+            >
+                tous ceux qui nous soutiennent
+            </button>
+        </p></a>
+    </section>
+
 </div>

@@ -2,12 +2,12 @@
         <h2 class="text-4xl font-bold text-gray-800 text-center mb-14">{{ $categorie->title }}</h2>
 
         <div class="grid md:grid-cols-3 gap-10" >
-             @foreach ($articles as $article)
-            <a href="{{ route('categorie',[$categorie->id,$article->id]) }}">
+             @foreach ($items as $item)
+            <a href="{{ route('categorie',[$categorie->id,$item->id]) }}">
               <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-semibold mb-3 text-green-200">{{ $article->title }}</h3>
+                <h3 class="text-2xl font-semibold mb-3 text-green-200">{{ $item->title }}</h3>
                 <div class="text-gray-100 leading-relaxed">
-                    {!! $article->summary !!}
+                    {!! $item->summary !!}
                 </div>
              </div>
             </a>

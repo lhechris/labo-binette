@@ -9,7 +9,7 @@ use App\Models\Categorie;
 class ShowCards extends Component
 {
     
-    public $articles;
+    public $items;
     public $categorie;
     private $withimg;
 
@@ -18,14 +18,15 @@ class ShowCards extends Component
         $cat = intval($cat);
         $this->categorie = Categorie::where('id', $cat)->firstOrFail();
 
-        $this->articles = Article::where('categorie_id', $cat)->get();
-        if (count($this->articles) == 0) {
-            $this->articles = Categorie::where('parent_id', $cat)->get();
+        $this->items = Article::where('categorie_id', $cat)->get();
+
+        if (count($this->items) == 0) {
+            $this->items = Categorie::where('parent_id', $cat)->get();
         }
 
         if (($option === null) || (trim($option) === '')){
             $this->withimg = false;
-            foreach($this->articles as $article) {
+            foreach($this->items as $article) {
                 if (($article->image !== null) && (trim($article->image) != '')) {
                     $this->withimg = true;
                 }
@@ -33,6 +34,7 @@ class ShowCards extends Component
         } else {
             $this->withimg = ($option === 'image');            
         }
+
     }
 
     public function render()

@@ -11,7 +11,7 @@
             >
         <div class="absolute inset-0 "></div>
 
-        <div class="relative text-center px-6  bg-gray-800/75">
+        <div class="relative text-center p-4 rounded-lg bg-gray-800/75">
             <h1 class="text-5xl md:text-6xl font-extrabold text-green-200 drop-shadow-lg">
                 {{ $title }}
             </h1>
