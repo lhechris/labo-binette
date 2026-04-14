@@ -10,65 +10,61 @@ class ShowCategorie extends Component
 {
     
     public $categorie;
-    public $subcategories;
-    public $subcategorie;
-    public $articles;
-    public $article;
-    private $rootelement;
+    public $items;
+    public $menus;
+    public $withimg;
 
-    public function mount($nom,$article)
+    private $isroot;
+
+    public function mount($id,$item_id)
     {
-        $nom = intval($nom);
-        $article = intval($article);
+        $id = intval($id);
+        $item_id = intval($item_id);
     
-        $this->categorie = Categorie::where('id', $nom)->firstOrFail();
+        $this->isroot = ($item_id == 0);
 
+        $this->categorie = Categorie::with(['children','articles'])->findOrFail($id);
 
-        $this->subcategories = Categorie::where('parent_id',$nom)->get();
-        $this->articles = Article::where('categorie_id',$nom)->get();
-        
-        if ($article === 0) {
-            $this->rootelement = true;
+        $this->items = $this->buildItems($item_id);
+        $this->menus = $this->buildMenus();
 
-            //s'il n'y a qu'un seul article ou une seule categorie 
-            //on l'affiche
-            if (count($this->articles) == 1) {
-                $this->rootelement = false;
-                $this->article = $this->articles[0];
-            }
-            if (count($this->subcategories) == 1) {
-                $this->rootelement = false;
-                $this->subcategories = $this->articles[0];
-            }
+        $this->withimg = $this->items->contains(function ($value,$key) {
+            \Log::info("id = $value->id image = $value->image ");
+            return ($value->image !== null && trim($value->image) !== '');
+        });
 
-        } else {
-            $this->rootelement = false;
+        \Log::info("withimg = $this->withimg");
 
-            foreach($this->articles as $item) {
-                if ($item->id == $article) {
-                    $this->article = $item;
-                    break;
-                }
-            }
-            foreach($this->subcategories as $item) {
-                if ($item->id == $article) {
-                    $this->subcategorie = $item;
-                    break;
-                }
-            }
-        }
     }
+
+    protected function buildItems(int $id = 0)
+    {
+        return collect()
+            ->merge(
+                $this->categorie->children
+                    ->when($id !== 0, fn ($q) => $q->where('id', $id))
+            )
+            ->merge(
+                $this->categorie->articles
+                    ->when($id !== 0, fn ($q) => $q->where('id', $id))
+            );
+    }
+
+    protected function buildMenus()
+    {
+        return collect()
+            ->merge($this->categorie->children)
+            ->merge($this->categorie->articles);
+    }
+
 
     public function render()
     {
-        if ($this->rootelement) {
+        if ($this->isroot) {
             return view('livewire.show-categorie');
-
-        } else if (count($this->articles)>0) {
-            return view('livewire.show-article');
-
         } else {
-            return view('livewire.show-subcategorie');
+            return view('livewire.show-article');
         }
+
     }
 }

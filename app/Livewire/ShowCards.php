@@ -18,21 +18,24 @@ class ShowCards extends Component
         $cat = intval($cat);
         $this->categorie = Categorie::where('id', $cat)->firstOrFail();
 
-        $this->items = Article::where('categorie_id', $cat)->get();
-
-        if (count($this->items) == 0) {
-            $this->items = Categorie::where('parent_id', $cat)->get();
-        }
+        $this->items = collect()
+            ->merge($this->categorie->children)
+            ->merge($this->categorie->articles);
+        
+        \Log::info('option=$option');
 
         if (($option === null) || (trim($option) === '')){
+            \Log::info('ici');
             $this->withimg = false;
-            foreach($this->items as $article) {
-                if (($article->image !== null) && (trim($article->image) != '')) {
+            foreach($this->items as $item) {
+                if (($item->image !== null) && (trim($item->image) != '')) {
+                    \Log::info('withimg=true');
                     $this->withimg = true;
                 }
             }            
         } else {
-            $this->withimg = ($option === 'image');            
+            \Log::info('la');
+            $this->withimg = ($option == 'image');            
         }
 
     }

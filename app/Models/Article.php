@@ -21,6 +21,17 @@ class Article extends Model
         return $this->belongsTo(Categorie::class);
     }
 
+
+    public function getTypeAttribute()
+    {
+        return 'article';
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('categorie',[$this->categorie_id,$this->id]);
+    }
+
     protected static function booted(): void {
         static::retrieved(function (Article $article) {
             $article->check_balises();
@@ -36,6 +47,7 @@ class Article extends Model
         $this->content = str_replace("<h2>",'<h2 class="py-4 font-bold text-lg">',$this->content);
 
     }
+
 
 
 }

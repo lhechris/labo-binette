@@ -11,7 +11,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/', \App\Livewire\ShowAccueil::class)->name('accueil');
 
-Route::get('/categorie/{nom}/{article}', \App\Livewire\ShowCategorie::class)->name("categorie");
+Route::get('/categorie/{id}/{item_id}', \App\Livewire\ShowCategorie::class)->name("categorie");
 
 Route::get('/partenaires', \App\Livewire\ShowPartenaires::class)->name('partenaires');
 
