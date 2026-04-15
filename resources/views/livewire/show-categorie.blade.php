@@ -15,30 +15,31 @@ use Livewire\Component;
             </div>
         </div>
     </nav>
-
-@if ($withimg == true)
-    <section class="bg-gray-800 py-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
-            @foreach ($items as $item)
-            <x-card-img route="{{ $item->url }}"
-                title="{{$item->title}}"
-                image="{{$item->image}}"
-            />
-            @endforeach
-        </div>
-    </section>
-@else
-    <section class="max-w-6xl mx-auto px-6 py-20">
-        <div class="grid md:grid-cols-3 gap-10" >
-            @foreach ($items as $item)
-            <x-card route="{{ $item->url }}"
-                title="{{$item->title}}"
-                summary="{{$item->summary}}"
-            />
-            @endforeach
-        </div>
-    </section>
-@endif
-
+    <div class="flex flex-col items-center h-screen ">
+        <div class="mt-4 mb-4 max-w-6xl">{!! $categorie->content !!}</div>
+        @if ($withimg == true)
+        <section class="bg-gray-800 py-20 max-w-6xl">        
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
+                @foreach ($items as $item)
+                <x-card-img route="{{ $item->url }}"
+                    title="{{$item->title}}"
+                    image="{{$item->image}}"
+                />
+                @endforeach
+            </div>
+        </section>
+        @else
+        <section class="max-w-6xl mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-3 gap-10" >
+                @foreach ($items as $item)
+                <x-card route="{{ $item->url }}"
+                    title="{{$item->title}}"
+                    summary="{{$item->summary}}"
+                />
+                @endforeach
+            </div>
+        </section>
+        @endif
+    </div>
 </div>
 

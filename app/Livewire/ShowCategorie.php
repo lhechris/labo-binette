@@ -29,12 +29,8 @@ class ShowCategorie extends Component
         $this->menus = $this->buildMenus();
 
         $this->withimg = $this->items->contains(function ($value,$key) {
-            \Log::info("id = $value->id image = $value->image ");
             return ($value->image !== null && trim($value->image) !== '');
         });
-
-        \Log::info("withimg = $this->withimg");
-
     }
 
     protected function buildItems(int $id = 0)
