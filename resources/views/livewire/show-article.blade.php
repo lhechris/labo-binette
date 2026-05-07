@@ -16,8 +16,9 @@ use Livewire\Component;
         </div>
     </nav>
     
-    <section class="max-w-6xl mx-auto px-6 py-20">
+    <section class="max-w-6xl mx-auto px-6 py-1">
         <div>
+           
         @foreach ($items as $item)
            @if ($item->type == 'article')
             {!! $item->content !!}

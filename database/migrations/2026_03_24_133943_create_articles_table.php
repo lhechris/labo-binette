@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('summary')->nullable();
             $table->string('image')->nullable();
             $table->longText('content')->nullable();
+            $table->longText('content_type')->nullable();
             $table->timestamps();
         });
     }

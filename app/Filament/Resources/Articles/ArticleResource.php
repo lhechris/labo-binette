@@ -45,4 +45,5 @@ class ArticleResource extends Resource
             'edit' => EditArticle::route('/{record}/edit'),
         ];
     }
+
 }

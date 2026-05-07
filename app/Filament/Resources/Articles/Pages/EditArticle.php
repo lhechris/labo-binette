@@ -16,4 +16,28 @@ class EditArticle extends EditRecord
             DeleteAction::make(),
         ];
     }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        if ($data['content_type'] === 'svg') {
+            $data['content_svg'] = $data['content'] ?? null;
+        } else {
+            $data['content_text'] = $data['content'] ?? null;
+        }
+
+        return $data;
+    }
+
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['content'] = $data['content_type'] === 'svg'
+            ? $data['content_svg']
+            : $data['content_text'];
+
+        unset($data['content_text'], $data['content_svg']);
+
+        return $data;
+    }
+
 }

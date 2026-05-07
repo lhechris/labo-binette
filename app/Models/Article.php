@@ -14,6 +14,7 @@ class Article extends Model
         'summary',
         'image',
         'content',
+        'content_type'
     ];
 
     public function categorie() : BelongsTo
